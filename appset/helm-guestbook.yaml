@@ -14,16 +14,16 @@ spec:
       requeueAfterSeconds: 300
   template:
     metadata:
-      name: 'appset-app-{{`{{branch}}`}}-{{`{{number}}`}}'
+      name: 'appset-app-{{branch}}-{{number}}'
     spec:
       destination:
-        namespace: 'helm-guestbook-{{`{{branch}}`}}-{{`{{number}}`}}'
-        server: {{ .Values.spec.destination.server }}
+        namespace: 'helm-guestbook-{{branch}}-{{number}}'
+        server: https://kubernetes.default.svc
       project: default
       source:
         path: helm-guestbook
-        repoURL: {{ .Values.spec.source.repoURL }}
-        targetRevision: '{{`{{head_sha}}`}}'
+        repoURL: https://github.com/dwillett/argocd-example-apps
+        targetRevision: '{{head_sha}}'
       syncPolicy:
         automated:
           prune: true
