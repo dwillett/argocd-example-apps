@@ -9,6 +9,9 @@ spec:
       github:
         owner: "dwillett"
         repo: "argocd-example-apps"
+        tokenRef:
+          secretName: github-token
+          key: token
   template:
     metadata:
       name: 'appset-{{branch}}-{{number}}'
