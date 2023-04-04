@@ -9,8 +9,6 @@ spec:
       github:
         owner: "dwillett"
         repo: "argocd-example-apps"
-        labels:
-        - "argo"
       requeueAfterSeconds: 300
   template:
     metadata:
