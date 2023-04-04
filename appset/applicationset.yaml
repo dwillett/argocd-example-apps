@@ -9,18 +9,17 @@ spec:
       github:
         owner: "dwillett"
         repo: "argocd-example-apps"
-      requeueAfterSeconds: 300
   template:
     metadata:
-      name: 'appset-app-{{branch}}-{{number}}'
+      name: 'appset-{{branch}}-{{number}}'
     spec:
       destination:
-        namespace: 'helm-guestbook-{{branch}}-{{number}}'
+        namespace: 'argoexamples'
         server: https://kubernetes.default.svc
       project: default
       source:
         path: helm-guestbook
-        repoURL: https://github.com/dwillett/argocd-example-apps
+        repoURL: https://github.com/dwillett/argocd-example-apps.git
         targetRevision: '{{head_sha}}'
       syncPolicy:
         automated:
