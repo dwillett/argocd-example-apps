@@ -14,7 +14,7 @@ spec:
       name: 'appset-{{branch}}-{{number}}'
     spec:
       destination:
-        namespace: 'argoexamples'
+        namespace: 'appset-{{branch}}-{{number}}'
         server: https://kubernetes.default.svc
       project: default
       source:
