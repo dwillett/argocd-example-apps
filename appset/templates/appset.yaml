@@ -12,7 +12,7 @@ spec:
         owner: "dwillett"
         repo: "argocd-example-apps"
         labels:
-        - "argo"
+        - argo
   template:
     metadata:
       name: 'appset-app-{{`{{.branch}}`}}-{{`{{.number}}`}}'
