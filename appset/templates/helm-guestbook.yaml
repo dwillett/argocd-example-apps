@@ -3,8 +3,6 @@ kind: ApplicationSet
 metadata:
   name: appset
   namespace: argoexamples
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
   generators:
   - pullRequest:
@@ -13,15 +11,22 @@ spec:
         repo: "argocd-example-apps"
         labels:
         - "argo"
+      requeueAfterSeconds: 300
   template:
     metadata:
       name: 'appset-app-{{`{{branch}}`}}-{{`{{number}}`}}'
     spec:
       destination:
-        namespace: 'helm-guestbook-{{`{{number}}`}}'
+        namespace: 'helm-guestbook-{{`{{branch}}`}}-{{`{{number}}`}}'
         server: {{ .Values.spec.destination.server }}
       project: default
       source:
         path: helm-guestbook
         repoURL: {{ .Values.spec.source.repoURL }}
-        targetRevision: {{ .Values.spec.source.targetRevision }}
+        targetRevision: '{{`{{head_sha}}`}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
