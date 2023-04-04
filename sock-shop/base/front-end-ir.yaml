@@ -13,3 +13,4 @@ spec:
         - kind: Service
           name: front-end
           namespace: argoexamples
+          port: 80
