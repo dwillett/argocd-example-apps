@@ -1,35 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ template "helm-guestbook.fullname" . }}-ingress
+  name: guestbook-ui-ingress
   namespace: argoexamples
 spec:
+  ingressClassName: nginx
   rules:
-    - host: guestbook.local.willett.rocks
+    - host: guestbook.control-plane.release.com
       http:
         paths:
           - path: /
             pathType: Exact
             backend:
               service:
-                name:  {{ template "helm-guestbook.fullname" . }}
-                port:
-                  number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ template "helm-guestbook.fullname" . }}-preview-ingress
-  namespace: argoexamples
-spec:
-  rules:
-    - host: guestbook-preview.local.willett.rocks
-      http:
-        paths:
-          - path: /
-            pathType: Exact
-            backend:
-              service:
-                name:  {{ template "helm-guestbook.fullname" . }}-preview
+                name: guestbook-ui
                 port:
                   number: 80
